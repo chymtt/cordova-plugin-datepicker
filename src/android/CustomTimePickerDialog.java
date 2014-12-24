@@ -17,7 +17,7 @@ import android.view.View;
 import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
 
-public abstract class CustomeTimePickerDialog extends AlertDialog implements OnClickListener, OnTimeChangedListener {
+public abstract class CustomTimePickerDialog extends AlertDialog implements OnClickListener, OnTimeChangedListener {
     public final static String[] DISPLAYED_MINS = { "0", "5", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55" };
 
     public interface OnTimeSetListener {

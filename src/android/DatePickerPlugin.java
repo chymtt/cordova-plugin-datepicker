@@ -268,9 +268,9 @@ public class DatePickerPlugin extends CordovaPlugin {
             int hourOfDay, int minute, boolean is24HourView) {
 
         if (android.os.Build.VERSION.SDK_INT >= 11) {
-            return new CustomeNewTimePickerDialog(context, callback, hourOfDay, minute, is24HourView);
+            return new CustomNewTimePickerDialog(context, callback, hourOfDay, minute, is24HourView);
         }else{
-            return new CustomeLegacyTimePickerDialog(context, callback, hourOfDay, minute, is24HourView);
+            return new CustomLegacyTimePickerDialog(context, callback, hourOfDay, minute, is24HourView);
         }
 
     }
