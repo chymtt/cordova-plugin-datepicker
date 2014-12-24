@@ -1,7 +1,6 @@
 /**
- * @author Bikas Vaibhav (http://bikasv.com) 2013
- * Rewrote the plug-in at https://github.com/phonegap/phonegap-plugins/tree/master/Android/DatePicker
- * It can now accept `min` and `max` dates for DatePicker.
+ * @author Do Anh Tu 2014
+ * Rewrote the plug-in at https://github.com/VitaliiBlagodir/cordova-plugin-datepicker
  */
 
 package com.plugin.datepicker;
@@ -235,7 +234,7 @@ public class DatePickerPlugin extends CordovaPlugin {
 		}
 	}
 
-	private final class TimeSetListener implements OnTimeSetListener {
+	private final class TimeSetListener implements CustomTimePickerDialog.OnTimeSetListener {
 		private final DatePickerPlugin datePickerPlugin;
 		private final CallbackContext callbackContext;
 
@@ -261,5 +260,17 @@ public class DatePickerPlugin extends CordovaPlugin {
 			callbackContext.success(toReturn);
 		}
 	}
+
+    private static CustomTimePickerDialog getCustomTimePicker(Context context,
+            OnTimeSetListener callBack,
+            int hourOfDay, int minute, boolean is24HourView) {
+
+        if (android.os.Build.VERSION.SDK_INT >= 11) {
+            return new CustomeNewTimePickerDialog(context, callback, hourOfDay, minute, is24HourView);
+        }else{
+            return new CustomeLegacyTimePickerDialog(context, callback, hourOfDay, minute, is24HourView);
+        }
+
+    }
 
 }
