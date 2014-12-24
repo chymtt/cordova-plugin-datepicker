@@ -19,7 +19,6 @@ import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
@@ -33,6 +32,8 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 
 import android.os.Build;
+
+import com.plugin.datepicker.CustomTimePickerDialog.OnTimeSetListener;
 
 @SuppressWarnings("deprecation")
 @SuppressLint("NewApi")
@@ -98,8 +99,9 @@ public class DatePickerPlugin extends CordovaPlugin {
 				@Override
 				public void run() {
 					final TimeSetListener timeSetListener = new TimeSetListener(datePickerPlugin, callbackContext);
-					final TimePickerDialog timeDialog = new TimePickerDialog(currentCtx, timeSetListener, mHour,
-							mMinutes, false);
+					// final TimePickerDialog timeDialog = new TimePickerDialog(currentCtx, timeSetListener, mHour,
+					// 		mMinutes, false);
+                    final CustomTimePickerDialog timeDialog = getCustomTimePicker(currentCtx, timeSetListener, mHour, mMinutes, false);
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 						timeDialog.setCancelable(true);
 						timeDialog.setCanceledOnTouchOutside(false);
@@ -234,7 +236,7 @@ public class DatePickerPlugin extends CordovaPlugin {
 		}
 	}
 
-	private final class TimeSetListener implements CustomTimePickerDialog.OnTimeSetListener {
+	private final class TimeSetListener implements OnTimeSetListener {
 		private final DatePickerPlugin datePickerPlugin;
 		private final CallbackContext callbackContext;
 
